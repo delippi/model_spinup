@@ -23,10 +23,12 @@ while (fhr <= fmax):
    fnd = Dataset(data_in,mode='r')
 
    if(varname=='ugrdmidlayer' or varname=='tmpmidlayer' or varname=='spfhmidlayer'):
-      KE.append(0.5*(np.abs(fnd.variables[varname][0,:,:,:])).sum(dtype='float')**2)
+      #sum( 0.5 * var**2)
+      KE.append((0.5*(fnd.variables[varname][0,:,:,:])**2).sum(dtype='float'))
 
    if(varname=='pressfc'):
-      KE.append(0.5*(np.abs(fnd.variables[varname][0,:,:])).sum(dtype='float')**2)
+      #sum( 0.5 * var**2)
+      KE.append((0.5*(fnd.variables[varname][0,:,:])**2).sum(dtype='float'))
 
    fcsthour.append(fhr)
    fhr+=finc

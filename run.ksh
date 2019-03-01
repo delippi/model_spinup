@@ -12,7 +12,8 @@ fields="ugrdmidlayer tmpmidlayer pressfc spfhmidlayer"
 for field in $fields; do
 
 cd /gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup
-mkdir $field && cd $field
+mkdir $field
+cd $field
 cat /dev/null > model_spinup_$field.log
 cp ../templates/model_spinup_template.py model_spinup_$field.py
 sed -i "s/@varname@/$field/g" model_spinup_$field.py
