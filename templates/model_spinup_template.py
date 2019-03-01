@@ -14,6 +14,7 @@ fcsthour=[]
 fmax=240
 
 varname="@varname@"
+SDATE="@SDATE@"
 
 while (fhr <= fmax):
    filename="gfs.t00z.atmf{:03d}.nc4".format(fhr); print(filename)
@@ -65,12 +66,12 @@ ax.plot(fcsthour,KE,color=color,marker='o',markersize=l_dot_size,label=label,lin
 ax.set_xticks(cticks[::4])
 leg=plt.legend(fontsize=legend_fontsize,ncol=4,scatterpoints=1,loc='lower left')
 plt.grid('on')
-title=plt.suptitle("FV3GFS Model Spinup "+label,fontsize=fig_title_fontsize,x=0.5,y=0.95)
+title=plt.suptitle("FV3GFS Model Spinup "+SDATE,fontsize=fig_title_fontsize,x=0.5,y=0.95)
 plt.xlabel("Forecast Hour",fontsize=xy_label_fontsize)
 plt.ylabel("Total Kinetic Energy",fontsize=xy_label_fontsize)
 
 leg.get_frame().set_alpha(0.9)
-plt.savefig('../figs/TKE_'+varname+'.png')
+plt.savefig('../figs/'+SDATE+'_TKE_'+varname+'.png')
 
 
 

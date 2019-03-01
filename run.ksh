@@ -3,6 +3,7 @@
 cd /gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup
 mkdir -p figs
 
+SDATE=2018091100
 fields="ugrdmidlayer tmpmidlayer pressfc spfhmidlayer"
 #fields="ugrdmidlayer"
 #fields="pressfc"
@@ -15,6 +16,7 @@ mkdir $field && cd $field
 cat /dev/null > model_spinup_$field.log
 cp ../templates/model_spinup_template.py model_spinup_$field.py
 sed -i "s/@varname@/$field/g" model_spinup_$field.py
+sed -i "s/@SDATE@/$SDATE/g" model_spinup_$field.py
 
 
 cat << EOF > model_spinup_$field.ksh
