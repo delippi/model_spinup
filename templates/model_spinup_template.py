@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 import os,sys
 import numpy as np
 from netCDF4 import Dataset
+#import psutil
 
-datapath="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/NATURE-2018091100-2018091800/gfs.20180911/00/"
+datapath1="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/NATURE-2018091100-2018091800/gfs.20180911/00/"
+datapath2="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/NATURE-2018091100-2018091800/gfs.20180911/00/"
 fhr=0
 finc=3
 i=0
@@ -16,24 +18,84 @@ fmax=240
 varname="@varname@"
 SDATE="@SDATE@"
 
+
+threeD_var=False
+twoD_var=False
+velocity=False
+if(varname=='ugrdmidlayer'):                           threeD_var=True; velocity=True
+if(varname=='tmpmidlayer' or varname=='spfhmidlayer'): threeD_var=True; velocity=False
+if(varname=='pressfc'):                                thwoD_var=True;  velocity=False
+
+
 while (fhr <= fmax):
-   filename="gfs.t00z.atmf{:03d}.nc4".format(fhr); print(filename)
-   sys.stdout.flush()
-   data_in=os.path.join(datapath,filename)
-   fnd = Dataset(data_in,mode='r')
+   filename="gfs.t00z.atmf{:03d}.nc4".format(fhr); print(filename); sys.stdout.flush()
+   data_in1=os.path.join(datapath1,filename)
+   data_in2=os.path.join(datapath2,filename)
+   fnd1 = Dataset(data_in1,mode='r')
+   fnd2 = Dataset(data_in2,mode='r')
 
-   if(varname=='ugrdmidlayer' or varname=='tmpmidlayer' or varname=='spfhmidlayer'):
-      #sum( 0.5 * var**2)
-      KE.append((0.5*(fnd.variables[varname][0,:,:,:])**2).sum(dtype='float'))
 
-   if(varname=='pressfc'):
-      #sum( 0.5 * var**2)
-      KE.append((0.5*(fnd.variables[varname][0,:,:])**2).sum(dtype='float'))
+   #Three dimensional, vector varaiables
+   if(threeD_var and velocity): #e.g., ugrd
+      #Eq 1. Wind Speed = sqrt(u**2 + v**2)
+      #Eq 2. Kinetic Energy = sum(0.5 * var**2)
+      varname1='ugrdmidlayer'
+      varname2='vgrdmidlayer'
+      u_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
+      v_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
+      spd=np.zeros(shape=(64, 1536, 3072)).astype('float16')
+      ke=np.zeros(shape=(64, 1536, 3072)).astype('float16')
+
+      for lev in range(64): #loop over levels to not max out memory in batch job
+         u_diff[lev,:,:]=(fnd1.variables[varname1][0,lev,:,:].astype('float16') - fnd2.variables[varname1][0,lev,:,:].astype('float16')) #convert from float32 for memory issues
+         v_diff[lev,:,:]=(fnd1.variables[varname2][0,lev,:,:].astype('float16') - fnd2.variables[varname2][0,lev,:,:].astype('float16'))
+         spd[lev,:,:]=np.sqrt(u_diff[lev,:,:]**2 + v_diff[lev,:,:]**2) #Eq 1. Wind Speed
+         ke[lev,:,:]=0.5*(spd[lev,:,:]**2) #Eq 2. Kinetic Energy
+      del u_diff #done with this variable for this forecast hour. detlete.
+      del v_diff #done with this variable for this forecast hour. detlete.
+      del spd #done with this variable for this forecast hour. detlete.
+
+      KE.append(ke.sum(dtype='float16')) #append total kinetic energy to KE list
+      del ke #done with this variable for this forecast hour. detlete.
+
+
+
+   #Three dimensional, non-vector varaiables
+   if(threeD_var and not velocity): #e.g., tmp, spfh
+      #Eq 3. Energy = sum( 0.5 * var**2)
+      var_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
+      ke=np.zeros(shape=(64, 1536, 3072)).astype('float16')
+
+      for lev in range(64): #loop over levels to not max out memory in batch job
+         var_diff[lev,:,:]=(fnd1.variables[varname][0,lev,:,:].astype('float16') - fnd2.variables[varname][0,lev,:,:].astype('float16')) #convert from float32 for memory issues
+         ke[lev,:,:]=0.5*(var_diff[lev,:,:]**2) #Eq 3. Energy
+      del var_diff #done with this variable for this forecast hour. detlete.
+
+      KE.append(ke.sum(dtype='float16'))
+      del ke #done with this variable for this forecast hour. detlete.
+
+
+
+   #Two dimensional variables
+   if(twoD_var): #e.g., sfc pres
+      #Eq 3. Energy = sum( 0.5 * var**2)
+      var_diff=np.zeros(shape=(1536, 3072)).astype('float16')
+      ke=np.zeros(shape=(1536, 3072)).astype('float16')
+
+      var_diff[:,:]=(fnd1.variables[varname][0,:,:].astype('float16') - fnd2.variables[varname][0,:,:].astype('float16')) #convert from float32 for memory issues
+      ke[:,:]=0.5*(var_diff[:,:]**2) #Eq 3. Energy
+      del var_diff #done with this variable for this forecast hour. detlete.
+
+      KE.append(ke.sum(dtype='float16'))
+      del ke #done with this variable for this forecast hour. detlete.
+
+
 
    fcsthour.append(fhr)
    fhr+=finc
    i+=1
-   fnd.close()
+   fnd1.close()
+   fnd2.close()
 
 
 
