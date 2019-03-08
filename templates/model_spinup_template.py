@@ -13,7 +13,7 @@ i=0
 KE=[]
 fcsthour=[]
 fmax=240
-fmax=141
+fmax=234 #forecast goes out to 240, but nature is offset by 6 hours.
 
 varname="@varname@"
 SDATE="@SDATE@"
@@ -50,7 +50,6 @@ while (fhr <= fmax):
       u_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
       v_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
       spd=np.zeros(shape=(64, 1536, 3072)).astype('float32')
-      print("checkpoint 1/3"); sys.stdout.flush()
 
       for lev in range(64): #loop over levels to not max out memory in batch job
          u_diff[lev,:,:]=(fnd1.variables[varname1][0,lev,:,:].astype('float16') \
@@ -59,7 +58,6 @@ while (fhr <= fmax):
                         - fnd2.variables[varname2][0,lev,:,:].astype('float16'))
          spd[lev,:,:]=np.sqrt(u_diff[lev,:,:]**2 + v_diff[lev,:,:]**2) #Eq 1. Wind Speed
 
-      print("checkpoint 2/3"); sys.stdout.flush()
       del u_diff #done with this variable for this forecast hour. detlete.
       del v_diff #done with this variable for this forecast hour. detlete.
 
@@ -69,7 +67,6 @@ while (fhr <= fmax):
       del spd #done with this variable for this forecast hour. detlete.
 
       KE.append(ke.sum(dtype='float32')) #append total kinetic energy to KE list
-      print("checkpoint 3/3"); sys.stdout.flush() 
       del ke #done with this variable for this forecast hour. detlete.
 
 
@@ -146,9 +143,9 @@ ax.plot(fcsthour,KE,color=color,marker='o',markersize=l_dot_size,label=label,lin
 ax.set_xticks(cticks[::4])
 leg=plt.legend(fontsize=legend_fontsize,ncol=4,scatterpoints=1,loc='lower left')
 plt.grid('on')
-title=plt.suptitle("FV3GFS Model Spinup "+SDATE,fontsize=fig_title_fontsize,x=0.5,y=0.95)
+title=plt.suptitle("FV3GFS Total Energy Difference "+SDATE,fontsize=fig_title_fontsize,x=0.5,y=0.95)
 plt.xlabel("Forecast Hour",fontsize=xy_label_fontsize)
-plt.ylabel("Total Kinetic Energy",fontsize=xy_label_fontsize)
+plt.ylabel("Total Energy",fontsize=xy_label_fontsize)
 
 leg.get_frame().set_alpha(0.9)
 plt.savefig('../figs/'+SDATE+'_TKE_'+varname+'.png')
