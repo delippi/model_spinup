@@ -13,9 +13,9 @@ cd $path
 fhr=0
 typeset -Z3 fhr
 
-while [[ $fhr -le 240 ]]; do
+while [[ $fhr -le 720 ]]; do
    echo "$fhr"
-   if [[ ! -e gfs.t00z.atmf$fhr.nemsio ]]; then; echo "wait 60s \n"; sleep 60; fi
+   while [[ ! -e gfs.t00z.atmf$fhr.nemsio ]]; do; echo "wait 60s \n"; sleep 60; done
    nemsio2nc4.py --nemsio gfs.t00z.atmf$fhr.nemsio & ; for_job=$!
    (( mod=$fhr%9 ))
    if [[ $mod -eq 0 ]]; then; echo "waiting...";  wait $for_job; fi

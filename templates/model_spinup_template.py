@@ -5,15 +5,14 @@ import os,sys
 import numpy as np
 from netCDF4 import Dataset
 
-datapath1="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/NATURE-2018091100-2018091800/gfs.20180911/00/"
-datapath2="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/NODA-2018091100-2018091800/gfs.20180911/06"
-fhr=0
-finc=3
+datapath1="@datapath1@"
+datapath2="@datapath2@"
+fhr=@fhr@
+finc=@finc@
 i=0
 KE=[]
 fcsthour=[]
-fmax=240
-fmax=234 #forecast goes out to 240, but nature is offset by 6 hours.
+fmax=@fmax@
 
 varname="@varname@"
 SDATE="@SDATE@"
@@ -140,7 +139,9 @@ if(varname=='spfhmidlayer'):
   label='TKE(spfh)'
 
 ax.plot(fcsthour,KE,color=color,marker='o',markersize=l_dot_size,label=label,linewidth=linewidth,linestyle='-')
-ax.set_xticks(cticks[::4])
+xlabels=cticks[::8]
+ax.set_xticks(xlabels)
+ax.set_xticklabels(xlabels,rotation=45)
 leg=plt.legend(fontsize=legend_fontsize,ncol=4,scatterpoints=1,loc='lower left')
 plt.grid('on')
 title=plt.suptitle("FV3GFS Total Energy Difference "+SDATE,fontsize=fig_title_fontsize,x=0.5,y=0.95)
