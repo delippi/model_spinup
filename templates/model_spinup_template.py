@@ -44,26 +44,22 @@ while (fhr <= fmax):
    if(threeD_var and velocity): #e.g., ugrd
       #Eq 1. Wind Speed = sqrt(u**2 + v**2)
       #Eq 2. Kinetic Energy = sum(0.5 * var**2)
+      #Eq 3. KE for wind = 0.5(u**2 + v**2)
       varname1='ugrdmidlayer'
       varname2='vgrdmidlayer'
       u_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
       v_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
-      spd=np.zeros(shape=(64, 1536, 3072)).astype('float32')
+      ke=np.zeros(shape=(64, 1536, 3072)).astype('float32')
 
       for lev in range(64): #loop over levels to not max out memory in batch job
          u_diff[lev,:,:]=(fnd1.variables[varname1][0,lev,:,:].astype('float16') \
                         - fnd2.variables[varname1][0,lev,:,:].astype('float16'))
          v_diff[lev,:,:]=(fnd1.variables[varname2][0,lev,:,:].astype('float16') \
                         - fnd2.variables[varname2][0,lev,:,:].astype('float16'))
-         spd[lev,:,:]=np.sqrt(u_diff[lev,:,:]**2 + v_diff[lev,:,:]**2) #Eq 1. Wind Speed
+         ke[lev,:,:]=0.5*(u_diff[lev,:,:]**2 + v_diff[lev,:,:]**2) #Eq 3. KE for wind
 
       del u_diff #done with this variable for this forecast hour. detlete.
       del v_diff #done with this variable for this forecast hour. detlete.
-
-      ke=np.zeros(shape=(64, 1536, 3072)).astype('float32')
-      for lev in range(64): #loop over levels to not max out memory in batch job
-         ke[lev,:,:]=0.5*(spd[lev,:,:]**2) #Eq 2. Kinetic Energy
-      del spd #done with this variable for this forecast hour. detlete.
 
       KE.append(ke.sum(dtype='float32')) #append total kinetic energy to KE list
       del ke #done with this variable for this forecast hour. detlete.
