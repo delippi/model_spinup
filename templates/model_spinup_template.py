@@ -142,7 +142,7 @@ while (fhr <= fmax):
             del v_diff #done with this variable for this forecast hour. detlete.
             KE.append(ke.sum(dtype='float32')) #append total kinetic energy to KE list
             del ke #done with this variable for this forecast hour. detlete.
-            figname=SDATE+"_TE_"+str(plevel)+"-hPa_"+varname
+            figname=SDATE+"_TE_"+str(plevel)+"-hPa_Wind"
             figtitle="FV3GFS TED"+str(plevel)+"-hPa "+SDATE
             ylabel="Total Energy Difference"
 
@@ -161,7 +161,7 @@ while (fhr <= fmax):
             rmsd=np.sqrt(spd_diff.mean(dtype='float32'))
             del spd_diff #done with this variable for this forecast hour. detlete.
             KE.append(rmsd)
-            figname=SDATE+"_RMSD_"+str(plevel)+"-hPa_"+varname
+            figname=SDATE+"_RMSD_"+str(plevel)+"-hPa_Wind"
             figtitle="FV3GFS RMSD "+str(plevel)+"-hPa "+SDATE
             ylabel="Root Mean Square Difference"
 
