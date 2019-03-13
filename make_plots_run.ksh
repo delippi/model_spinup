@@ -11,7 +11,7 @@ if [[ $input_nemsio == "YES" ]]; then; suffix="nemsio2nc"; fi
 
 cd /gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup/
 mkdir -p plots/figs
-cd sfc_plots
+cd plots
 EXP="FreeRunLow"
 EXP1="FreeRunLow1"
 EXP2="FreeRunLow2"
@@ -35,6 +35,8 @@ elif [[ $group -eq 4 ]]; then
    FHSTART=720
    FHEND=936
 fi
+#FHSTART=936
+#FHEND=936
 
 FHINC=24
 
