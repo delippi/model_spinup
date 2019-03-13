@@ -10,7 +10,7 @@ if [[ $input_grib2  == "YES" ]]; then; suffix="grib2nc";   fi
 if [[ $input_nemsio == "YES" ]]; then; suffix="nemsio2nc"; fi
 
 cd /gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup/
-mkdir -p sfc_plots/figs
+mkdir -p plots/figs
 cd sfc_plots
 EXP="FreeRunLow"
 EXP1="FreeRunLow1"

@@ -46,7 +46,7 @@ for exp in range(exp_count):
 
 
 
-outputdir="/gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup/sfc_plots/figs"
+outputdir="/gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup/plots/figs"
 print(filename,pdy,cyc,valpdy,valcyc,valtime)
 data_in=[]
 for i in range(exp_count): data_in.append(os.path.join(datadir[i],filename[i]))   # name of analysis file
