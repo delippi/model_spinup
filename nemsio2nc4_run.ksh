@@ -12,8 +12,8 @@ exps="FreeRunLow1 FreeRunLow2"
 fhr=0
 fmax=936 #39 days
 finc=24
-nemsio=".true."
-grb2=".false."
+nemsio=".false."
+grb2=".true."
 RES=384
 #RES=768
 

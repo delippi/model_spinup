@@ -13,27 +13,61 @@ i=0
 KE=[]
 fcsthour=[]
 fmax=@fmax@
+RES=@RES@
 
 varname="@varname@"
 SDATE="@SDATE@"
 
-
+RootMeanSquareDiff=@RootMeanSquareDiff@
+Energy=@Energy@
 threeD_var=False
 twoD_var=False
 velocity=False
-if(varname=='ugrdmidlayer'):                           threeD_var=True; velocity=True
-if(varname=='tmpmidlayer' or varname=='spfhmidlayer'): threeD_var=True; velocity=False
-if(varname=='pressfc'):                                twoD_var=True;   velocity=False
+nemsio=False
+grb2=False
+if(varname=='ugrdmidlayer'):
+   threeD_var=True; velocity=True; nemsio=True; grb2=False; color='#000000'; label='wind'
+if(varname=='UGRD_P0_L100_GGA0'):
+   threeD_var=True; velocity=True; nemsio=False; grb2=True; color='#000000'; label='wind'
+
+if(varname=='tmpmidlayer'):
+   threeD_var=True; velocity=False; nemsio=True; grb2=False; color='#ff0044'; label='tmp'
+if(varname=='TMP_P0_L100_GGA0'):
+   threeD_var=True; velocity=False; nemsio=False; grb2=True; color='#ff0044'; label='tmp'
+
+if(varname=='spfhmidlayer'):
+   threeD_var=True; velocity=False; nemsio=True; grb2=False; color='#00aaff'; label='spfh'
+if(varname=='SPFH_P0_L100_GGA0'):
+   threeD_var=True; velocity=False; nemsio=False; grb2=True; color='#00aaff'; label='spfh'
+
+if(varname=='pressfc'):
+   twoD_var=True; velocity=False; nemsio=True; grb2=False; color='#ff8c00'; label='psfc'
+if(varname=='PRES_P0_L1_GGA0'):
+   twoD_var=True; velocity=False; nemsio=False; grb2=True; color='#ff8c00'; label='psfc'
+
+if(grb2):
+   plevel=500 #hPa
+   plevels=[ .4,  1,  2,  3,  5,  7, 10, 15, 20, 30,\
+             40, 50, 70,100,125,150,175,200,225,250,\
+            275,300,325,350,375,400,425,450,475,500,\
+            525,550,575,600,625,650,675,700,725,750,\
+            775,800,825,850,875,900,925,950,975,1000]
+   model_level=plevels.index(plevel) #return index of 500 mb
+
+if(RES == 384): lats=768; lons=1536
+if(RES == 768): lats=1536; lons=3072
 
 
 while (fhr <= fmax):
-   #NATURE - 6 hr fcst = 0 hr fcst of NODA 
-   filename1="gfs.t00z.atmf{:03d}.nc4".format(fhr+6)
+   #Experiment 1 - regular ICs from gdas analysis
+   if(nemsio): filename1="gfs.t00z.atmf{:03d}.nc4".format(fhr)
+   if(grb2):   filename1="gfs.t00z.master.grb2f{:03d}.nc4".format(fhr)
    data_in1=os.path.join(datapath1,filename1)
    fnd1 = Dataset(data_in1,mode='r')
 
-   #NODA
-   filename2="gfs.t06z.atmf{:03d}.nc4".format(fhr)
+   #Experiment 2 - perturbed ICs from enkf mem080 analysis
+   if(nemsio): filename2="gfs.t00z.atmf{:03d}.nc4".format(fhr)
+   if(grb2):   filename2="gfs.t00z.master.grb2f{:03d}.nc4".format(fhr)
    data_in2=os.path.join(datapath2,filename2)
    fnd2 = Dataset(data_in2,mode='r')
 
@@ -45,41 +79,147 @@ while (fhr <= fmax):
       #Eq 1. Wind Speed = sqrt(u**2 + v**2)
       #Eq 2. Kinetic Energy = sum(0.5 * var**2)
       #Eq 3. KE for wind = 0.5(u**2 + v**2)
-      varname1='ugrdmidlayer'
-      varname2='vgrdmidlayer'
-      u_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
-      v_diff=np.zeros(shape=(64, 1536, 3072)).astype('float16')
-      ke=np.zeros(shape=(64, 1536, 3072)).astype('float32')
+      #Eq 4. RMSD = sqrt( 1/N * sqrt([(u1-u2)**2 - (v1-v2)**2])**2) == sqrt( 1/N * [(u1-u2)**2 - (v1-v2)**2] )
 
-      for lev in range(64): #loop over levels to not max out memory in batch job
-         u_diff[lev,:,:]=(fnd1.variables[varname1][0,lev,:,:].astype('float16') \
-                        - fnd2.variables[varname1][0,lev,:,:].astype('float16'))
-         v_diff[lev,:,:]=(fnd1.variables[varname2][0,lev,:,:].astype('float16') \
-                        - fnd2.variables[varname2][0,lev,:,:].astype('float16'))
-         ke[lev,:,:]=0.5*(u_diff[lev,:,:]**2 + v_diff[lev,:,:]**2) #Eq 3. KE for wind
+      if(nemsio): 
+         varname1='ugrdmidlayer'
+         varname2='vgrdmidlayer'
 
-      del u_diff #done with this variable for this forecast hour. detlete.
-      del v_diff #done with this variable for this forecast hour. detlete.
+         if(Energy): #ENERGY
+            u_diff=np.zeros(shape=(64,lats,lons)).astype('float16')
+            v_diff=np.zeros(shape=(64,lats,lons)).astype('float16')
+            ke=np.zeros(shape=(64,lats,lons)).astype('float32')
+            for lev in range(64): #loop over levels to not max out memory in batch job
+               u_diff[lev,:,:]=(fnd1.variables[varname1][0,lev,:,:].astype('float16') \
+                              - fnd2.variables[varname1][0,lev,:,:].astype('float16'))
+               v_diff[lev,:,:]=(fnd1.variables[varname2][0,lev,:,:].astype('float16') \
+                              - fnd2.variables[varname2][0,lev,:,:].astype('float16'))
+               ke[lev,:,:]=0.5*(u_diff[lev,:,:]**2 + v_diff[lev,:,:]**2) #Eq 3. KE for wind
+            del u_diff #done with this variable for this forecast hour. detlete.
+            del v_diff #done with this variable for this forecast hour. detlete.
+            KE.append(ke.sum(dtype='float32')) #append total kinetic energy to KE list
+            del ke #done with this variable for this forecast hour. detlete.
+            figname=SDATE+"_TE_Wind"
+            figtitle="FV3GFS Total Energy Difference"+SDATE
+            ylabel="Total Energy"
 
-      KE.append(ke.sum(dtype='float32')) #append total kinetic energy to KE list
-      del ke #done with this variable for this forecast hour. detlete.
+         if(RootMeanSquareDiff): #RMSD
+            u_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            v_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            spd_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            lev=50
+            lev=lev-1
+            u_diff[:,:]=(fnd1.variables[varname1][0,lev,:,:].astype('float32') \
+                       - fnd2.variables[varname1][0,lev,:,:].astype('float32'))
+            v_diff[:,:]=(fnd1.variables[varname2][0,lev,:,:].astype('float32') \
+                       - fnd2.variables[varname2][0,lev,:,:].astype('float32'))
+            spd_diff[:,:]=u_diff[:,:]**2 + v_diff[:,:]**2 #sqrt cancelled by **2 later
+            del u_diff #done with this variable for this forecast hour. detlete.
+            del v_diff #done with this variable for this forecast hour. detlete.
+            rmsd=np.sqrt(spd_diff.mean(dtype='float32'))
+            del spd_diff #done with this variable for this forecast hour. detlete.
+            KE.append(rmsd)
+            figname=SDATE+"_RMSD_Wind"
+            figtitle="FV3GFS RMSD model level "+str(lev+1)+" "+SDATE
+            ylabel="Root Mean Square Difference"
+
+
+      if(grb2):
+         varname1='UGRD_P0_L100_GGA0'
+         varname2='VGRD_P0_L100_GGA0'
+
+         if(Energy): #ENERGY
+            u_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            v_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            ke=np.zeros(shape=(lats,lons)).astype('float32')
+            lev=model_level
+            u_diff[:,:]=(fnd1.variables[varname1][lev,:,:].astype('float32') \
+                       - fnd2.variables[varname1][lev,:,:].astype('float32'))
+            v_diff[:,:]=(fnd1.variables[varname2][lev,:,:].astype('float32') \
+                       - fnd2.variables[varname2][lev,:,:].astype('float32'))
+            ke[:,:]=0.5*(u_diff[:,:]**2 + v_diff[:,:]**2) #Eq 3. KE for wind
+            del u_diff #done with this variable for this forecast hour. detlete.
+            del v_diff #done with this variable for this forecast hour. detlete.
+            KE.append(ke.sum(dtype='float32')) #append total kinetic energy to KE list
+            del ke #done with this variable for this forecast hour. detlete.
+            figname=SDATE+"_TE_"+str(plevel)+"-hPa_"+varname
+            figtitle="FV3GFS TED"+str(plevel)+"-hPa "+SDATE
+            ylabel="Total Energy Difference"
+
+         if(RootMeanSquareDiff): #RMSD
+            u_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            v_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            spd_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            lev=model_level
+            u_diff[:,:]=(fnd1.variables[varname1][lev,:,:].astype('float32') \
+                       - fnd2.variables[varname1][lev,:,:].astype('float32'))
+            v_diff[:,:]=(fnd1.variables[varname2][lev,:,:].astype('float32') \
+                       - fnd2.variables[varname2][lev,:,:].astype('float32'))
+            spd_diff[:,:]=u_diff[:,:]**2 + v_diff[:,:]**2 #sqrt cancelled by **2 later
+            del u_diff #done with this variable for this forecast hour. detlete.
+            del v_diff #done with this variable for this forecast hour. detlete.
+            rmsd=np.sqrt(spd_diff.mean(dtype='float32'))
+            del spd_diff #done with this variable for this forecast hour. detlete.
+            KE.append(rmsd)
+            figname=SDATE+"_RMSD_"+str(plevel)+"-hPa_"+varname
+            figtitle="FV3GFS RMSD "+str(plevel)+"-hPa "+SDATE
+            ylabel="Root Mean Square Difference"
+
 
 
 
    #Three dimensional, non-vector varaiables
    if(threeD_var and not velocity): #e.g., tmp, spfh
-      #Eq 3. Energy = sum( 0.5 * var**2)
-      var_diff=np.zeros(shape=(64, 1536, 3072)).astype('float32')
-      ke=np.zeros(shape=(64, 1536, 3072)).astype('float32')
 
-      for lev in range(64): #loop over levels to not max out memory in batch job
-         var_diff[lev,:,:]=(fnd1.variables[varname][0,lev,:,:].astype('float32') \
-                          - fnd2.variables[varname][0,lev,:,:].astype('float32'))
-         ke[lev,:,:]=0.5*(var_diff[lev,:,:]**2) #Eq 3. Energy
-      del var_diff #done with this variable for this forecast hour. detlete.
+      if(nemsio):
+         if(Energy): #Energy
+            #Eq 3. Energy = sum( 0.5 * var**2)
+            var_diff=np.zeros(shape=(64,lats,lons)).astype('float32')
+            ke=np.zeros(shape=(64,lats,lons)).astype('float32')
+            for lev in range(64): #loop over levels to not max out memory in batch job
+               var_diff[lev,:,:]=(fnd1.variables[varname][0,lev,:,:].astype('float32') \
+                                - fnd2.variables[varname][0,lev,:,:].astype('float32'))
+               ke[lev,:,:]=0.5*(var_diff[lev,:,:]**2) #Eq 3. Energy
+            del var_diff #done with this variable for this forecast hour. detlete.
+            KE.append(ke.sum(dtype='float32'))
+            del ke #done with this variable for this forecast hour. detlete.
+         if(RootMeanSquareDiff): #RMSD
+            var_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            lev=model_level
+            var_diff[:,:]=(fnd1.variables[varname][0,lev,:,:].astype('float32') \
+                         - fnd2.variables[varname][0,lev,:,:].astype('float32'))
+            var_diff[:,:]=var_diff[:,:]**2
+            rmsd=np.sqrt(var_diff.mean(dtype='float32'))
+            del var_diff #done with this variable for this forecast hour. detlete.
+            KE.append(rmsd)
+            figname=SDATE+"_RMSD_"+str(plevel)+"-hPa_"+varname
+            figtitle="FV3GFS RMSD "+str(plevel)+"-hPa "+SDATE
+            ylabel="Root Mean Square Difference"
 
-      KE.append(ke.sum(dtype='float32'))
-      del ke #done with this variable for this forecast hour. detlete.
+      if(grb2):
+         if(Energy): #Energy
+            #Eq 3. Energy = sum( 0.5 * var**2)
+            var_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            ke=np.zeros(shape=(lats,lons)).astype('float32')
+            lev=model_level
+            var_diff[lev,:,:]=(fnd1.variables[varname][lev,:,:].astype('float32') \
+                             - fnd2.variables[varname][lev,:,:].astype('float32'))
+            ke[lev,:,:]=0.5*(var_diff[lev,:,:]**2) #Eq 3. Energy
+            del var_diff #done with this variable for this forecast hour. detlete.
+            KE.append(ke.sum(dtype='float32'))
+            del ke #done with this variable for this forecast hour. detlete.
+         if(RootMeanSquareDiff): #RMSD
+            var_diff=np.zeros(shape=(lats,lons)).astype('float32')
+            lev=model_level
+            var_diff[:,:]=(fnd1.variables[varname][lev,:,:].astype('float32') \
+                         - fnd2.variables[varname][lev,:,:].astype('float32'))
+            var_diff[:,:]=var_diff[:,:]**2
+            rmsd=np.sqrt(var_diff.mean(dtype='float32'))
+            del var_diff #done with this variable for this forecast hour. detlete.
+            KE.append(rmsd)
+            figname=SDATE+"_RMSD_"+str(plevel)+"-hPa_"+varname
+            figtitle="FV3GFS RMSD "+str(plevel)+"-hPa "+SDATE
+            ylabel="Root Mean Square Difference"
 
 
 
@@ -121,31 +261,20 @@ ax = fig.add_subplot(111)
 cticks=np.arange(0,fmax+3,3).tolist()
 
 
-if(varname=='ugrdmidlayer'):
-  color='#000000'
-  label='TKE(ugrd)'
-if(varname=='tmpmidlayer'):
-  color='#ff0044'
-  label='TKE(tmp)'
-if(varname=='pressfc'):
-  color='#55ff00'
-  label='TKE(psfc)'
-if(varname=='spfhmidlayer'):
-  color='#00aaff'
-  label='TKE(spfh)'
-
 ax.plot(fcsthour,KE,color=color,marker='o',markersize=l_dot_size,label=label,linewidth=linewidth,linestyle='-')
 xlabels=cticks[::8]
 ax.set_xticks(xlabels)
 ax.set_xticklabels(xlabels,rotation=45)
 leg=plt.legend(fontsize=legend_fontsize,ncol=4,scatterpoints=1,loc='lower left')
 plt.grid('on')
-title=plt.suptitle("FV3GFS Total Energy Difference "+SDATE,fontsize=fig_title_fontsize,x=0.5,y=0.95)
+title=plt.suptitle(figtitle,fontsize=fig_title_fontsize,x=0.5,y=0.95)
 plt.xlabel("Forecast Hour",fontsize=xy_label_fontsize)
-plt.ylabel("Total Energy",fontsize=xy_label_fontsize)
+plt.ylabel(ylabel,fontsize=xy_label_fontsize)
 
 leg.get_frame().set_alpha(0.9)
-plt.savefig('../figs/'+SDATE+'_TKE_'+varname+'.png')
+
+
+plt.savefig('../figs/'+figname+'.png')
 
 
 
