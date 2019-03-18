@@ -1,0 +1,265 @@
+current vfit of radar wind data, ranges in m/s
+ o-g                          ptop   1000.0    900.0    800.0    600.0    400.0    300.0    250.0    200.0    150.0    100.0     50.0      0.0
+ o-g it     obs use typ styp  pbot   1200.0   1000.0    900.0    800.0    600.0    400.0    300.0    250.0    200.0    150.0    100.0   2000.0
+----------------------------------------------------------------------------------------------------------------------------------------------
+ o-g 01      rw asm 999 0000 count     7754   251848   313276   506257   331749   136780    61379    62700    61622    71677    81857  1994254
+ o-g 01      rw asm 999 0000  bias     0.06     0.06     0.04     0.04    -0.02    -0.02    -0.08    -0.19    -0.09    -0.03    -0.02     0.01
+ o-g 01      rw asm 999 0000   rms     5.14     5.81     5.81     4.86     6.91     9.99    11.93    11.63     9.17     5.01     2.41     6.55
+ o-g 01      rw asm 999 0000  cpen    27.47    22.78    11.95     9.27    14.72    24.62    20.97    18.59    16.57     7.21     1.39    13.45
+ o-g 01      rw asm 999 0000 qcpen    27.47    22.78    11.95     9.27    14.72    24.62    20.97    18.59    16.57     7.21     1.39    13.45
+ o-g 01         asm all      count     7754   251848   313276   506257   331749   136780    61379    62700    61622    71677    81857  1994254
+ o-g 01         asm all       bias     0.06     0.06     0.04     0.04    -0.02    -0.02    -0.08    -0.19    -0.09    -0.03    -0.02     0.01
+ o-g 01         asm all        rms     5.14     5.81     5.81     4.86     6.91     9.99    11.93    11.63     9.17     5.01     2.41     6.55
+ o-g 01         asm all       cpen    27.47    22.78    11.95     9.27    14.72    24.62    20.97    18.59    16.57     7.21     1.39    13.45
+ o-g 01         asm all      qcpen    27.47    22.78    11.95     9.27    14.72    24.62    20.97    18.59    16.57     7.21     1.39    13.45
+ o-g 01      rw rej 999 0000 count        0       27      250        0      403     2014     1338     1305      371       38        0     5746
+ o-g 01      rw rej 999 0000  bias     0.00     3.59    -3.98     0.00     0.20     2.68     3.39     0.47     6.32    20.97     0.00     2.24
+ o-g 01      rw rej 999 0000   rms     0.00    21.20    23.09     0.00    22.50    24.81    24.16    24.09    21.83    20.99     0.00    24.04
+ o-g 01      rw rej 999 0000  cpen     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+ o-g 01      rw rej 999 0000 qcpen     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+ o-g 01         rej all      count        0       27      250        0      403     2014     1338     1305      371       38        0     5746
+ o-g 01         rej all       bias     0.00     3.59    -3.98     0.00     0.20     2.68     3.39     0.47     6.32    20.97     0.00     2.24
+ o-g 01         rej all        rms     0.00    21.20    23.09     0.00    22.50    24.81    24.16    24.09    21.83    20.99     0.00    24.04
+ o-g 01         rej all       cpen     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+ o-g 01         rej all      qcpen     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+ num(r) =  71615 at lev    1 pen,qcpen,cpen,cqcpen =  0.54812E+06  0.54812E+06   7.6537       7.6537    
+ num(r) =  27655 at lev    2 pen,qcpen,cpen,cqcpen =  0.40491E+06  0.40491E+06   14.642       14.642    
+ num(r) =  31754 at lev    3 pen,qcpen,cpen,cqcpen =  0.48650E+06  0.48650E+06   15.321       15.321    
+ num(r) =  31984 at lev    4 pen,qcpen,cpen,cqcpen =  0.49033E+06  0.49033E+06   15.330       15.330    
+ num(r) =  33081 at lev    5 pen,qcpen,cpen,cqcpen =  0.55645E+06  0.55645E+06   16.821       16.821    
+ num(r) =  32395 at lev    6 pen,qcpen,cpen,cqcpen =  0.59598E+06  0.59598E+06   18.397       18.397    
+ num(r) =  33686 at lev    7 pen,qcpen,cpen,cqcpen =  0.60893E+06  0.60893E+06   18.077       18.077    
+ num(r) =  36021 at lev    8 pen,qcpen,cpen,cqcpen =  0.68127E+06  0.68127E+06   18.913       18.913    
+ num(r) =  36446 at lev    9 pen,qcpen,cpen,cqcpen =  0.60208E+06  0.60208E+06   16.520       16.520    
+ num(r) =  39755 at lev   10 pen,qcpen,cpen,cqcpen =  0.63857E+06  0.63857E+06   16.063       16.063    
+ num(r) =  45584 at lev   11 pen,qcpen,cpen,cqcpen =  0.71073E+06  0.71073E+06   15.592       15.592    
+ num(r) =  50668 at lev   12 pen,qcpen,cpen,cqcpen =  0.74837E+06  0.74837E+06   14.770       14.770    
+ num(r) =  57547 at lev   13 pen,qcpen,cpen,cqcpen =  0.78258E+06  0.78258E+06   13.599       13.599    
+ num(r) =  61554 at lev   14 pen,qcpen,cpen,cqcpen =  0.78554E+06  0.78554E+06   12.762       12.762    
+ num(r) =  68841 at lev   15 pen,qcpen,cpen,cqcpen =  0.81989E+06  0.81989E+06   11.910       11.910    
+ num(r) =  76425 at lev   16 pen,qcpen,cpen,cqcpen =  0.75015E+06  0.75015E+06   9.8155       9.8155    
+ num(r) =  77963 at lev   17 pen,qcpen,cpen,cqcpen =  0.76814E+06  0.76814E+06   9.8526       9.8526    
+ num(r) =  74797 at lev   18 pen,qcpen,cpen,cqcpen =  0.72555E+06  0.72555E+06   9.7003       9.7003    
+ num(r) =  69695 at lev   19 pen,qcpen,cpen,cqcpen =  0.70083E+06  0.70083E+06   10.056       10.056    
+ num(r) =  65341 at lev   20 pen,qcpen,cpen,cqcpen =  0.71548E+06  0.71548E+06   10.950       10.950    
+ num(r) =  65177 at lev   21 pen,qcpen,cpen,cqcpen =  0.73667E+06  0.73667E+06   11.303       11.303    
+ num(r) =  65106 at lev   22 pen,qcpen,cpen,cqcpen =  0.76102E+06  0.76102E+06   11.689       11.689    
+ num(r) =  58713 at lev   23 pen,qcpen,cpen,cqcpen =  0.73579E+06  0.73579E+06   12.532       12.532    
+ num(r) =  55215 at lev   24 pen,qcpen,cpen,cqcpen =  0.90144E+06  0.90144E+06   16.326       16.326    
+ num(r) =  53623 at lev   25 pen,qcpen,cpen,cqcpen =  0.96538E+06  0.96538E+06   18.003       18.003    
+ num(r) =  46979 at lev   26 pen,qcpen,cpen,cqcpen =  0.89145E+06  0.89145E+06   18.976       18.976    
+ num(r) =  45408 at lev   27 pen,qcpen,cpen,cqcpen =  0.88775E+06  0.88775E+06   19.550       19.550    
+ num(r) =  42260 at lev   28 pen,qcpen,cpen,cqcpen =  0.10595E+07  0.10595E+07   25.071       25.071    
+ num(r) =  41847 at lev   29 pen,qcpen,cpen,cqcpen =  0.11787E+07  0.11787E+07   28.166       28.166    
+ num(r) =  38136 at lev   30 pen,qcpen,cpen,cqcpen =  0.92107E+06  0.92107E+06   24.152       24.152    
+ num(r) =  35624 at lev   31 pen,qcpen,cpen,cqcpen =  0.84140E+06  0.84140E+06   23.619       23.619    
+ num(r) =  34229 at lev   32 pen,qcpen,cpen,cqcpen =  0.80547E+06  0.80547E+06   23.532       23.532    
+ num(r) =  29385 at lev   33 pen,qcpen,cpen,cqcpen =  0.60849E+06  0.60849E+06   20.708       20.708    
+ num(r) =  25616 at lev   34 pen,qcpen,cpen,cqcpen =  0.37099E+06  0.37099E+06   14.483       14.483    
+ num(r) =  25608 at lev   35 pen,qcpen,cpen,cqcpen =  0.29964E+06  0.29964E+06   11.701       11.701    
+ num(r) =  23420 at lev   36 pen,qcpen,cpen,cqcpen =  0.36321E+06  0.36321E+06   15.509       15.509    
+ num(r) =  27547 at lev   37 pen,qcpen,cpen,cqcpen =  0.53388E+06  0.53388E+06   19.381       19.381    
+ num(r) =  22804 at lev   38 pen,qcpen,cpen,cqcpen =  0.32853E+06  0.32853E+06   14.407       14.407    
+ num(r) =  24884 at lev   39 pen,qcpen,cpen,cqcpen =  0.23339E+06  0.23339E+06   9.3793       9.3793    
+ num(r) =  18874 at lev   40 pen,qcpen,cpen,cqcpen =   82964.       82964.       4.3957       4.3957    
+ num(r) =  22019 at lev   41 pen,qcpen,cpen,cqcpen =   35993.       35993.       1.6346       1.6346    
+ num(r) =  17916 at lev   42 pen,qcpen,cpen,cqcpen =   28405.       28405.       1.5854       1.5854    
+ num(r) =  13659 at lev   43 pen,qcpen,cpen,cqcpen =   18340.       18340.       1.3427       1.3427    
+ num(r) =  15776 at lev   44 pen,qcpen,cpen,cqcpen =   15516.       15516.      0.98355      0.98355    
+ num(r) =  14253 at lev   45 pen,qcpen,cpen,cqcpen =   17885.       17885.       1.2548       1.2548    
+ num(r) =  16733 at lev   46 pen,qcpen,cpen,cqcpen =   14684.       14684.      0.87753      0.87753    
+ num(r) =  12314 at lev   47 pen,qcpen,cpen,cqcpen =   11176.       11176.      0.90756      0.90756    
+ num(r) =   9689 at lev   48 pen,qcpen,cpen,cqcpen =   9273.9       9273.9      0.95715      0.95715    
+ num(r) =  10182 at lev   49 pen,qcpen,cpen,cqcpen =   12267.       12267.       1.2048       1.2048    
+ num(r) =   8374 at lev   50 pen,qcpen,cpen,cqcpen =   4691.2       4691.2      0.56021      0.56021    
+ num(r) =  10060 at lev   51 pen,qcpen,cpen,cqcpen =   6882.9       6882.9      0.68419      0.68419    
+ num(r) =   7627 at lev   52 pen,qcpen,cpen,cqcpen =   3100.9       3100.9      0.40656      0.40656    
+ num(r) =   7954 at lev   53 pen,qcpen,cpen,cqcpen =   5356.8       5356.8      0.67347      0.67347    
+ num(r) =   5789 at lev   54 pen,qcpen,cpen,cqcpen =   3048.0       3048.0      0.52651      0.52651    
+ num(r) =   4748 at lev   55 pen,qcpen,cpen,cqcpen =   2586.4       2586.4      0.54473      0.54473    
+ num(r) =   5590 at lev   56 pen,qcpen,cpen,cqcpen =   4544.3       4544.3      0.81294      0.81294    
+ num(r) =   6440 at lev   57 pen,qcpen,cpen,cqcpen =   2457.6       2457.6      0.38162      0.38162    
+ num(r) =   1579 at lev   58 pen,qcpen,cpen,cqcpen =   473.27       473.27      0.29973      0.29973    
+ num(r) =    271 at lev   59 pen,qcpen,cpen,cqcpen =   1.1727       1.1727      0.43275E-02  0.43275E-02
+ num(r) =     19 at lev   60 pen,qcpen,cpen,cqcpen =  0.25834E-02  0.25834E-02  0.13597E-03  0.13597E-03
+ num(r) =      0 at lev   61 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   62 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   63 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   64 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ number of    rw obs that failed gross test =  5746 nonlin qc test =     0
+ number of    rw obs extrapolated above top sigma layer=       0
+           number extrapolated below bottom sigma layer=       0
+ number of    rw obs with station elevation > 2km =   139149
+ number with abs(guess topography-station elevation) > 200m =  1345468
+ type      rw jiter   1 nread         0 nkeep 2000000 num 1994254
+ type      rw pen=  0.268237863082792722E+08 qcpen=  0.268237863082792722E+08 r=   13.4505     qcr=   13.4505    
+current vfit of radar wind data, ranges in m/s
+ o-g                          ptop   1000.0    900.0    800.0    600.0    400.0    300.0    250.0    200.0    150.0    100.0     50.0      0.0
+ o-g it     obs use typ styp  pbot   1200.0   1000.0    900.0    800.0    600.0    400.0    300.0    250.0    200.0    150.0    100.0   2000.0
+----------------------------------------------------------------------------------------------------------------------------------------------
+ o-g 02      rw asm 999 0000 count     8173   254461   311267   506239   332013   139664    62127    63857    61987    71232    81622  2000000
+ o-g 02      rw asm 999 0000  bias    -0.00     0.01     0.00    -0.00    -0.03     0.03    -0.03    -0.01     0.03     0.01    -0.00    -0.00
+ o-g 02      rw asm 999 0000   rms     0.63     0.64     1.05     1.58     2.54     3.52     4.16     4.17     3.35     1.98     1.21     2.11
+ o-g 02      rw asm 999 0000  cpen     0.40     0.19     0.19     0.13     0.12     0.22     0.26     0.37     0.23     0.11     0.08     0.16
+ o-g 02      rw asm 999 0000 qcpen     0.40     0.19     0.19     0.13     0.12     0.22     0.26     0.37     0.23     0.11     0.08     0.16
+ o-g 02         asm all      count     8173   254461   311267   506239   332013   139664    62127    63857    61987    71232    81622  2000000
+ o-g 02         asm all       bias    -0.00     0.01     0.00    -0.00    -0.03     0.03    -0.03    -0.01     0.03     0.01    -0.00    -0.00
+ o-g 02         asm all        rms     0.63     0.64     1.05     1.58     2.54     3.52     4.16     4.17     3.35     1.98     1.21     2.11
+ o-g 02         asm all       cpen     0.40     0.19     0.19     0.13     0.12     0.22     0.26     0.37     0.23     0.11     0.08     0.16
+ o-g 02         asm all      qcpen     0.40     0.19     0.19     0.13     0.12     0.22     0.26     0.37     0.23     0.11     0.08     0.16
+ num(r) =  32061 at lev    1 pen,qcpen,cpen,cqcpen =   4691.1       4691.1      0.14632      0.14632    
+ num(r) =  22794 at lev    2 pen,qcpen,cpen,cqcpen =   3878.6       3878.6      0.17016      0.17016    
+ num(r) =  28123 at lev    3 pen,qcpen,cpen,cqcpen =   4468.6       4468.6      0.15890      0.15890    
+ num(r) =  30320 at lev    4 pen,qcpen,cpen,cqcpen =   3853.8       3853.8      0.12710      0.12710    
+ num(r) =  35631 at lev    5 pen,qcpen,cpen,cqcpen =   4781.6       4781.6      0.13420      0.13420    
+ num(r) =  37983 at lev    6 pen,qcpen,cpen,cqcpen =   5668.2       5668.2      0.14923      0.14923    
+ num(r) =  40052 at lev    7 pen,qcpen,cpen,cqcpen =   6153.8       6153.8      0.15365      0.15365    
+ num(r) =  46362 at lev    8 pen,qcpen,cpen,cqcpen =   7127.8       7127.8      0.15374      0.15374    
+ num(r) =  50852 at lev    9 pen,qcpen,cpen,cqcpen =   8494.0       8494.0      0.16703      0.16703    
+ num(r) =  52823 at lev   10 pen,qcpen,cpen,cqcpen =   8634.8       8634.8      0.16347      0.16347    
+ num(r) =  54864 at lev   11 pen,qcpen,cpen,cqcpen =   9969.7       9969.7      0.18172      0.18172    
+ num(r) =  58649 at lev   12 pen,qcpen,cpen,cqcpen =   8007.8       8007.8      0.13654      0.13654    
+ num(r) =  60288 at lev   13 pen,qcpen,cpen,cqcpen =   9454.2       9454.2      0.15682      0.15682    
+ num(r) =  63904 at lev   14 pen,qcpen,cpen,cqcpen =   10816.       10816.      0.16925      0.16925    
+ num(r) =  66939 at lev   15 pen,qcpen,cpen,cqcpen =   10741.       10741.      0.16046      0.16046    
+ num(r) =  74109 at lev   16 pen,qcpen,cpen,cqcpen =   10419.       10419.      0.14059      0.14059    
+ num(r) =  75497 at lev   17 pen,qcpen,cpen,cqcpen =   11609.       11609.      0.15377      0.15377    
+ num(r) =  67865 at lev   18 pen,qcpen,cpen,cqcpen =   9391.6       9391.6      0.13839      0.13839    
+ num(r) =  68419 at lev   19 pen,qcpen,cpen,cqcpen =   9512.6       9512.6      0.13903      0.13903    
+ num(r) =  63010 at lev   20 pen,qcpen,cpen,cqcpen =   9526.9       9526.9      0.15120      0.15120    
+ num(r) =  62537 at lev   21 pen,qcpen,cpen,cqcpen =   9509.7       9509.7      0.15207      0.15207    
+ num(r) =  62664 at lev   22 pen,qcpen,cpen,cqcpen =   8839.7       8839.7      0.14106      0.14106    
+ num(r) =  60148 at lev   23 pen,qcpen,cpen,cqcpen =   6996.7       6996.7      0.11632      0.11632    
+ num(r) =  52916 at lev   24 pen,qcpen,cpen,cqcpen =   7062.1       7062.1      0.13346      0.13346    
+ num(r) =  57445 at lev   25 pen,qcpen,cpen,cqcpen =   6633.9       6633.9      0.11548      0.11548    
+ num(r) =  45945 at lev   26 pen,qcpen,cpen,cqcpen =   6038.0       6038.0      0.13142      0.13142    
+ num(r) =  48468 at lev   27 pen,qcpen,cpen,cqcpen =   5716.0       5716.0      0.11793      0.11793    
+ num(r) =  42914 at lev   28 pen,qcpen,cpen,cqcpen =   6811.1       6811.1      0.15871      0.15871    
+ num(r) =  42287 at lev   29 pen,qcpen,cpen,cqcpen =   9335.1       9335.1      0.22076      0.22076    
+ num(r) =  39735 at lev   30 pen,qcpen,cpen,cqcpen =   8364.3       8364.3      0.21050      0.21050    
+ num(r) =  33305 at lev   31 pen,qcpen,cpen,cqcpen =   15408.       15408.      0.46264      0.46264    
+ num(r) =  34180 at lev   32 pen,qcpen,cpen,cqcpen =   9817.1       9817.1      0.28722      0.28722    
+ num(r) =  34072 at lev   33 pen,qcpen,cpen,cqcpen =   8145.0       8145.0      0.23905      0.23905    
+ num(r) =  26930 at lev   34 pen,qcpen,cpen,cqcpen =   8271.5       8271.5      0.30715      0.30715    
+ num(r) =  28084 at lev   35 pen,qcpen,cpen,cqcpen =   9605.0       9605.0      0.34201      0.34201    
+ num(r) =  23263 at lev   36 pen,qcpen,cpen,cqcpen =   7940.8       7940.8      0.34135      0.34135    
+ num(r) =  26149 at lev   37 pen,qcpen,cpen,cqcpen =   4273.2       4273.2      0.16342      0.16342    
+ num(r) =  23095 at lev   38 pen,qcpen,cpen,cqcpen =   3838.1       3838.1      0.16619      0.16619    
+ num(r) =  21745 at lev   39 pen,qcpen,cpen,cqcpen =   3531.9       3531.9      0.16242      0.16242    
+ num(r) =  17343 at lev   40 pen,qcpen,cpen,cqcpen =   1258.8       1258.8      0.72584E-01  0.72584E-01
+ num(r) =  20206 at lev   41 pen,qcpen,cpen,cqcpen =   1082.3       1082.3      0.53564E-01  0.53564E-01
+ num(r) =  17519 at lev   42 pen,qcpen,cpen,cqcpen =   1011.5       1011.5      0.57736E-01  0.57736E-01
+ num(r) =  12686 at lev   43 pen,qcpen,cpen,cqcpen =   1289.6       1289.6      0.10166      0.10166    
+ num(r) =  16080 at lev   44 pen,qcpen,cpen,cqcpen =   1137.8       1137.8      0.70757E-01  0.70757E-01
+ num(r) =  12970 at lev   45 pen,qcpen,cpen,cqcpen =   1522.9       1522.9      0.11741      0.11741    
+ num(r) =  17318 at lev   46 pen,qcpen,cpen,cqcpen =   824.61       824.61      0.47616E-01  0.47616E-01
+ num(r) =  11596 at lev   47 pen,qcpen,cpen,cqcpen =   1489.8       1489.8      0.12848      0.12848    
+ num(r) =   9123 at lev   48 pen,qcpen,cpen,cqcpen =   927.68       927.68      0.10169      0.10169    
+ num(r) =  10373 at lev   49 pen,qcpen,cpen,cqcpen =   1385.5       1385.5      0.13357      0.13357    
+ num(r) =   9409 at lev   50 pen,qcpen,cpen,cqcpen =   655.68       655.68      0.69687E-01  0.69687E-01
+ num(r) =  10081 at lev   51 pen,qcpen,cpen,cqcpen =   827.61       827.61      0.82096E-01  0.82096E-01
+ num(r) =   7357 at lev   52 pen,qcpen,cpen,cqcpen =   459.71       459.71      0.62486E-01  0.62486E-01
+ num(r) =   7536 at lev   53 pen,qcpen,cpen,cqcpen =   828.17       828.17      0.10989      0.10989    
+ num(r) =   6036 at lev   54 pen,qcpen,cpen,cqcpen =   517.35       517.35      0.85711E-01  0.85711E-01
+ num(r) =   4718 at lev   55 pen,qcpen,cpen,cqcpen =   391.30       391.30      0.82938E-01  0.82938E-01
+ num(r) =   5010 at lev   56 pen,qcpen,cpen,cqcpen =   792.96       792.96      0.15827      0.15827    
+ num(r) =   6713 at lev   57 pen,qcpen,cpen,cqcpen =   408.72       408.72      0.60885E-01  0.60885E-01
+ num(r) =   1269 at lev   58 pen,qcpen,cpen,cqcpen =   85.267       85.267      0.67192E-01  0.67192E-01
+ num(r) =    218 at lev   59 pen,qcpen,cpen,cqcpen =  0.19063      0.19063      0.87444E-03  0.87444E-03
+ num(r) =     12 at lev   60 pen,qcpen,cpen,cqcpen =  0.90553E-03  0.90553E-03  0.75461E-04  0.75461E-04
+ num(r) =      0 at lev   61 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   62 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   63 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   64 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ number of    rw obs that failed gross test =     0 nonlin qc test =     0
+ number of    rw obs extrapolated above top sigma layer=       0
+           number extrapolated below bottom sigma layer=       0
+ number of    rw obs with station elevation > 2km =   139149
+ number with abs(guess topography-station elevation) > 200m =  1345468
+ type      rw jiter   2 nread         0 nkeep 2000000 num 2000000
+ type      rw pen=  0.320234218214770721E+06 qcpen=  0.320234218214770721E+06 r=  0.160117     qcr=  0.160117    
+current vfit of radar wind data, ranges in m/s
+ o-g                          ptop   1000.0    900.0    800.0    600.0    400.0    300.0    250.0    200.0    150.0    100.0     50.0      0.0
+ o-g it     obs use typ styp  pbot   1200.0   1000.0    900.0    800.0    600.0    400.0    300.0    250.0    200.0    150.0    100.0   2000.0
+----------------------------------------------------------------------------------------------------------------------------------------------
+ o-g 03      rw asm 999 0000 count     8094   254657   311320   506161   332053   139708    61883    64113    61876    71175    81618  2000000
+ o-g 03      rw asm 999 0000  bias     0.00     0.00    -0.01    -0.00    -0.02     0.04    -0.02     0.03     0.05     0.02    -0.00     0.00
+ o-g 03      rw asm 999 0000   rms     0.40     0.42     0.76     1.30     2.13     2.98     3.50     3.53     2.83     1.74     1.06     1.76
+ o-g 03      rw asm 999 0000  cpen     0.16     0.09     0.09     0.06     0.05     0.07     0.08     0.10     0.08     0.04     0.03     0.07
+ o-g 03      rw asm 999 0000 qcpen     0.16     0.09     0.09     0.06     0.05     0.07     0.08     0.10     0.08     0.04     0.03     0.07
+ o-g 03         asm all      count     8094   254657   311320   506161   332053   139708    61883    64113    61876    71175    81618  2000000
+ o-g 03         asm all       bias     0.00     0.00    -0.01    -0.00    -0.02     0.04    -0.02     0.03     0.05     0.02    -0.00     0.00
+ o-g 03         asm all        rms     0.40     0.42     0.76     1.30     2.13     2.98     3.50     3.53     2.83     1.74     1.06     1.76
+ o-g 03         asm all       cpen     0.16     0.09     0.09     0.06     0.05     0.07     0.08     0.10     0.08     0.04     0.03     0.07
+ o-g 03         asm all      qcpen     0.16     0.09     0.09     0.06     0.05     0.07     0.08     0.10     0.08     0.04     0.03     0.07
+ num(r) =  26533 at lev    1 pen,qcpen,cpen,cqcpen =   1717.4       1717.4      0.64726E-01  0.64726E-01
+ num(r) =  20900 at lev    2 pen,qcpen,cpen,cqcpen =   1472.4       1472.4      0.70450E-01  0.70450E-01
+ num(r) =  27139 at lev    3 pen,qcpen,cpen,cqcpen =   1907.8       1907.8      0.70298E-01  0.70298E-01
+ num(r) =  30449 at lev    4 pen,qcpen,cpen,cqcpen =   1836.0       1836.0      0.60297E-01  0.60297E-01
+ num(r) =  36079 at lev    5 pen,qcpen,cpen,cqcpen =   2296.3       2296.3      0.63646E-01  0.63646E-01
+ num(r) =  38911 at lev    6 pen,qcpen,cpen,cqcpen =   2551.4       2551.4      0.65571E-01  0.65571E-01
+ num(r) =  40464 at lev    7 pen,qcpen,cpen,cqcpen =   2556.8       2556.8      0.63188E-01  0.63188E-01
+ num(r) =  46748 at lev    8 pen,qcpen,cpen,cqcpen =   3181.4       3181.4      0.68055E-01  0.68055E-01
+ num(r) =  51856 at lev    9 pen,qcpen,cpen,cqcpen =   3545.0       3545.0      0.68362E-01  0.68362E-01
+ num(r) =  54230 at lev   10 pen,qcpen,cpen,cqcpen =   4138.0       4138.0      0.76305E-01  0.76305E-01
+ num(r) =  57914 at lev   11 pen,qcpen,cpen,cqcpen =   5084.7       5084.7      0.87797E-01  0.87797E-01
+ num(r) =  60660 at lev   12 pen,qcpen,cpen,cqcpen =   4101.7       4101.7      0.67618E-01  0.67618E-01
+ num(r) =  62033 at lev   13 pen,qcpen,cpen,cqcpen =   4562.2       4562.2      0.73545E-01  0.73545E-01
+ num(r) =  65255 at lev   14 pen,qcpen,cpen,cqcpen =   5344.6       5344.6      0.81904E-01  0.81904E-01
+ num(r) =  67145 at lev   15 pen,qcpen,cpen,cqcpen =   5418.5       5418.5      0.80698E-01  0.80698E-01
+ num(r) =  74148 at lev   16 pen,qcpen,cpen,cqcpen =   5375.3       5375.3      0.72494E-01  0.72494E-01
+ num(r) =  75349 at lev   17 pen,qcpen,cpen,cqcpen =   5558.2       5558.2      0.73767E-01  0.73767E-01
+ num(r) =  67173 at lev   18 pen,qcpen,cpen,cqcpen =   4201.4       4201.4      0.62545E-01  0.62545E-01
+ num(r) =  67856 at lev   19 pen,qcpen,cpen,cqcpen =   4164.8       4164.8      0.61377E-01  0.61377E-01
+ num(r) =  63689 at lev   20 pen,qcpen,cpen,cqcpen =   4323.0       4323.0      0.67877E-01  0.67877E-01
+ num(r) =  62906 at lev   21 pen,qcpen,cpen,cqcpen =   3912.6       3912.6      0.62198E-01  0.62198E-01
+ num(r) =  61598 at lev   22 pen,qcpen,cpen,cqcpen =   3944.2       3944.2      0.64031E-01  0.64031E-01
+ num(r) =  60080 at lev   23 pen,qcpen,cpen,cqcpen =   3262.9       3262.9      0.54309E-01  0.54309E-01
+ num(r) =  52264 at lev   24 pen,qcpen,cpen,cqcpen =   3312.1       3312.1      0.63373E-01  0.63373E-01
+ num(r) =  57848 at lev   25 pen,qcpen,cpen,cqcpen =   2883.1       2883.1      0.49839E-01  0.49839E-01
+ num(r) =  45972 at lev   26 pen,qcpen,cpen,cqcpen =   2729.0       2729.0      0.59362E-01  0.59362E-01
+ num(r) =  49021 at lev   27 pen,qcpen,cpen,cqcpen =   2589.2       2589.2      0.52818E-01  0.52818E-01
+ num(r) =  43172 at lev   28 pen,qcpen,cpen,cqcpen =   3014.1       3014.1      0.69816E-01  0.69816E-01
+ num(r) =  41893 at lev   29 pen,qcpen,cpen,cqcpen =   3374.8       3374.8      0.80558E-01  0.80558E-01
+ num(r) =  40276 at lev   30 pen,qcpen,cpen,cqcpen =   2637.1       2637.1      0.65476E-01  0.65476E-01
+ num(r) =  31559 at lev   31 pen,qcpen,cpen,cqcpen =   3738.3       3738.3      0.11845      0.11845    
+ num(r) =  33476 at lev   32 pen,qcpen,cpen,cqcpen =   3289.9       3289.9      0.98275E-01  0.98275E-01
+ num(r) =  35106 at lev   33 pen,qcpen,cpen,cqcpen =   2726.5       2726.5      0.77665E-01  0.77665E-01
+ num(r) =  27142 at lev   34 pen,qcpen,cpen,cqcpen =   2250.3       2250.3      0.82909E-01  0.82909E-01
+ num(r) =  27636 at lev   35 pen,qcpen,cpen,cqcpen =   2826.7       2826.7      0.10228      0.10228    
+ num(r) =  23011 at lev   36 pen,qcpen,cpen,cqcpen =   2432.9       2432.9      0.10573      0.10573    
+ num(r) =  25928 at lev   37 pen,qcpen,cpen,cqcpen =   1481.0       1481.0      0.57120E-01  0.57120E-01
+ num(r) =  22501 at lev   38 pen,qcpen,cpen,cqcpen =   1435.1       1435.1      0.63780E-01  0.63780E-01
+ num(r) =  20925 at lev   39 pen,qcpen,cpen,cqcpen =   1431.0       1431.0      0.68386E-01  0.68386E-01
+ num(r) =  17350 at lev   40 pen,qcpen,cpen,cqcpen =   544.66       544.66      0.31392E-01  0.31392E-01
+ num(r) =  20211 at lev   41 pen,qcpen,cpen,cqcpen =   621.69       621.69      0.30760E-01  0.30760E-01
+ num(r) =  17818 at lev   42 pen,qcpen,cpen,cqcpen =   566.11       566.11      0.31772E-01  0.31772E-01
+ num(r) =  12347 at lev   43 pen,qcpen,cpen,cqcpen =   552.58       552.58      0.44754E-01  0.44754E-01
+ num(r) =  16790 at lev   44 pen,qcpen,cpen,cqcpen =   499.70       499.70      0.29762E-01  0.29762E-01
+ num(r) =  12234 at lev   45 pen,qcpen,cpen,cqcpen =   564.09       564.09      0.46108E-01  0.46108E-01
+ num(r) =  17337 at lev   46 pen,qcpen,cpen,cqcpen =   324.37       324.37      0.18710E-01  0.18710E-01
+ num(r) =  11481 at lev   47 pen,qcpen,cpen,cqcpen =   679.55       679.55      0.59189E-01  0.59189E-01
+ num(r) =   8875 at lev   48 pen,qcpen,cpen,cqcpen =   375.74       375.74      0.42337E-01  0.42337E-01
+ num(r) =  10604 at lev   49 pen,qcpen,cpen,cqcpen =   633.37       633.37      0.59729E-01  0.59729E-01
+ num(r) =   9484 at lev   50 pen,qcpen,cpen,cqcpen =   240.15       240.15      0.25321E-01  0.25321E-01
+ num(r) =  10023 at lev   51 pen,qcpen,cpen,cqcpen =   389.31       389.31      0.38842E-01  0.38842E-01
+ num(r) =   7354 at lev   52 pen,qcpen,cpen,cqcpen =   274.41       274.41      0.37315E-01  0.37315E-01
+ num(r) =   7541 at lev   53 pen,qcpen,cpen,cqcpen =   376.06       376.06      0.49868E-01  0.49868E-01
+ num(r) =   6020 at lev   54 pen,qcpen,cpen,cqcpen =   273.99       273.99      0.45514E-01  0.45514E-01
+ num(r) =   4850 at lev   55 pen,qcpen,cpen,cqcpen =   190.27       190.27      0.39231E-01  0.39231E-01
+ num(r) =   4528 at lev   56 pen,qcpen,cpen,cqcpen =   357.22       357.22      0.78892E-01  0.78892E-01
+ num(r) =   6895 at lev   57 pen,qcpen,cpen,cqcpen =   199.12       199.12      0.28878E-01  0.28878E-01
+ num(r) =   1192 at lev   58 pen,qcpen,cpen,cqcpen =   44.759       44.759      0.37549E-01  0.37549E-01
+ num(r) =    211 at lev   59 pen,qcpen,cpen,cqcpen =  0.14174      0.14174      0.67177E-03  0.67177E-03
+ num(r) =     10 at lev   60 pen,qcpen,cpen,cqcpen =  0.47709E-03  0.47709E-03  0.47709E-04  0.47709E-04
+ num(r) =      0 at lev   61 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   62 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   63 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ num(r) =      0 at lev   64 pen,qcpen,cpen,cqcpen =   0.0000       0.0000       0.0000       0.0000    
+ number of    rw obs that failed gross test =     0 nonlin qc test =     0
+ number of    rw obs extrapolated above top sigma layer=       0
+           number extrapolated below bottom sigma layer=       0
+ number of    rw obs with station elevation > 2km =   139149
+ number with abs(guess topography-station elevation) > 200m =  1345468
+ type      rw jiter   3 nread         0 nkeep 2000000 num 2000000
+ type      rw pen=  0.134315119799009961E+06 qcpen=  0.134315119799009961E+06 r=  0.671576E-01 qcr=  0.671576E-01

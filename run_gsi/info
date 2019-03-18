@@ -1,0 +1,16 @@
+ iadate        2018           9          23           0
+ intdate  2018092300  2018092300  2018092300  2018092300
+ cdate2018092300
+ bufr file name is:
+ ./simbufr/nexrad_2018092300_fv3.t00z_drw.bufr
+
+Elapsed time: 00:26:15
+ Elapsed time (s) =   1575.15625000000
+ end of program
+ numradars =         154
+ numgates =         400
+ numelevs =          14
+ numazims =         360
+ numtimes =           1
+ ndata    =   309126766
+
