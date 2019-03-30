@@ -40,10 +40,14 @@ DATA=/gpfs/hps2/ptmp/$USER/$CDATE/$EXP_NAME
 BASEDIR=/gpfs/hps3/emc/meso/save/Donald.E.Lippi/global-workflow-20190306/
 ATMDIR=/gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup/run_gsi/
 PREPBUFR=$ATMDIR/prepbufr
+ATMG03=$ATMDIR/gdas.t00z.atmf285.nemsio
 ATMGES=$ATMDIR/gfs.t00z.atmf288.nemsio
+ATMG09=$ATMDIR/gdas.t00z.atmf291.nemsio
+SFCG03=$ATMDIR/gdas.t00z.sfcf285.nemsio
 SFCGES=$ATMDIR/gfs.t00z.sfcf288.nemsio
-#L2RWBUFR=$ATMDIR/nexrad_2018092300_fv3.t00z_drw.bufr
-L2RWBUFR=$ATMDIR/nexrad_2018092300_fv3.t00z_drw.bufr.KGRK
+SFCG09=$ATMDIR/gdas.t00z.sfcf291.nemsio
+L2RWBUFR=$ATMDIR/nexrad_2018092300_fv3.t00z_drw.bufr
+#L2RWBUFR=$ATMDIR/nexrad_2018092300_fv3.t00z_drw.bufr.KGRK
 FIXgsi=$BASEDIR/fix/fix_gsi
 CRTM_ROOT=
 GSI_EXE=$BASEDIR/exec/global_gsi.x
@@ -94,7 +98,7 @@ USE_CFP=${USE_CFP:-"NO"}
 # Set script / GSI control parameters
 DOHYBVAR=${DOHYBVAR:-"NO"}
 NMEM_ENKF=${NMEM_ENKF:-0}
-export DONST=${DONST:-"NO"}
+export DONST="YES"
 NST_GSI=${NST_GSI:-0}
 NSTINFO=${NSTINFO:-0}
 ZSEA1=${ZSEA1:-0}
@@ -117,11 +121,6 @@ cd $DATA
 
 ##############################################################
 # Fixed files
-BERROR=$FIXgsi/Big_Endian/global_berror.l${LEVS}y${NLAT_A}.f77
-ANAVINFO=$FIXgsi/global_anavinfo.l${LEVS}.txt.w
-CONVINFO=$FIXgsi/global_convinfo.txt
-RADARLIST=$FIXgsi/radar_list
-
 RTMFIX=$NWROOT/lib/crtm/${crtm_ver}/fix
 BERROR=${FIXgsi}/Big_Endian/global_berror.l${LEVS}y${NLAT_A}.f77
 SATANGL=${FIXgsi}/global_satangbias.txt
@@ -161,10 +160,15 @@ $NLN $OBERROR      errtable
 
 
 $NLN $L2RWBUFR l2rwbufr
+
+$NLN $ATMG03 sigf03
 $NLN $ATMGES sigf06
-$NLN $ATMGES sigf06
+$NLN $ATMG09 sigf09
+
+$NLN $SFCG03 sfcf03  
 $NLN $SFCGES sfcf06  
-#$NLN $ATMANL siganl
+$NLN $SFCg09 sfcf09  
+$NLN $ATMANL siganl
 
 
 #Create global_gsi namelist
@@ -175,20 +179,23 @@ cat > gsiparm.anl << EOF
   niter_no_qc(1)=50,niter_no_qc(2)=0,
   write_diag(1)=.true.,write_diag(2)=.false.,write_diag(3)=.true.,
   qoption=2,
-  gencode=78,
+  gencode=0,deltim=94,
   factqmin=0.5,factqmax=0.005,
   iguess=-1,
+  tzr_qc=1,
   oneobtest=.false.,retrieval=.false.,l_foto=.false.,
   use_pbl=.false.,use_compress=.true.,nsig_ext=12,gpstop=50.,
   use_gfs_nemsio=.true.,sfcnst_comb=.true.,
+  use_readin_anl_sfcmask=.false.,
+  lrun_subdirs=.true.,
   crtm_coeffs_path='./crtm_coeffs/',
   newpc4pred=.true.,adp_anglebc=.true.,angord=4,passive_bc=.true.,use_edges=.false.,
-  diag_precon=.true.,step_start=1.e-3,emiss_bc=.true.,
-  cwoption=3,imp_physics=$imp_physics,
+  diag_precon=.true.,step_start=1.e-3,emiss_bc=.true.,nhr_obsbin=3,
+  cwoption=3,imp_physics=$imp_physics,lupp=.true.,
 /
 &GRIDOPTS
   !JCAP_B=$JCAP,JCAP=$JCAP_A,NLAT=$NLAT_A,NLON=$NLON_A,nsig=$LEVS,
-  JCAP_B=$JCAP,JCAP=$JCAP_A,NLAT=$NLAT_A,NLON=$NLON_A,nsig=$LEVS,
+  JCAP_B=766,JCAP=766,NLAT=770,NLON=1536,nsig=64,
   regional=.false.,global_l2rw=.true.,nlayers(63)=3,nlayers(64)=6,
 /
 &BKGERR
@@ -207,7 +214,7 @@ cat > gsiparm.anl << EOF
   ljcdfi=.false.,alphajc=0.0,ljcpdry=.true.,bamp_jcpdry=5.0e7,
 /
 &STRONGOPTS
-  nstrong=0,nvmodes_keep=20,period_max=3.,baldiag_full=.true.,baldiag_inc=.true.,
+  tlnmc_option=2,nstrong=1,nvmodes_keep=8,period_max=6.,period_width=1.5,
 /
 &OBSQC
   dfact=0.75,dfact1=3.0,noiqc=.true.,oberrflg=.false.,c_varqc=0.02,
@@ -231,8 +238,7 @@ OBS_INPUT::
 &HYBRID_ENSEMBLE
   l_hyb_ens=.false.,
   generate_ens=.false.,
-  !beta_s0=0.125,readin_beta=.false., !commented line to force 3DVar in hyb mode. There is no berror 1538
-  beta_s0=1.000,readin_beta=.false.,  !so we need to trick GSI in this way to have "NODA"
+  beta_s0=0.125,readin_beta=.false.,
   s_ens_h=800.,s_ens_v=-0.8,readin_localization=.true.,
   aniso_a_en=.false.,oz_univ_static=.false.,uv_hyb_ens=.true.,
   ensemble_path='./ensemble_data/',
@@ -255,6 +261,8 @@ OBS_INPUT::
   learthrel_rw=.true.,
 /
 &NST
+  nst_gsi=3,
+  nstinfo=4,fac_dtl=1,fac_tsl=1,zsea1=0,zsea2=0,
 /
 EOF
 #cat gsiparm.anl
