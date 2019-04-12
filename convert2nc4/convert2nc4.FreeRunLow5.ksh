@@ -1,23 +1,23 @@
 #!/bin/ksh
 #BSUB -P FV3GFS-T2O
-#BSUB -J nemsio2nc4.@exp@
+#BSUB -J nemsio2nc4.FreeRunLow5
 #BSUB -W 06:00                    # wall-clock time (hrs:mins)
 #BSUB -n 1                       # number of tasks in job
 #BSUB -R "rusage[mem=3072]"       # number of cores
 #BSUB -q "dev"                    # queue
-#BSUB -o nemsio2nc4.@exp@.log               # output file name in which %J is replaced by the job ID
+#BSUB -o nemsio2nc4.FreeRunLow5.log               # output file name in which %J is replaced by the job ID
 
-cdump=@cdump@
-path=/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/@exp@-2018091100-2018091800/$cdump.20180911/00
-path=/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/@exp@-2018091100-2018091800/$cdump.20180923/00
+cdump=gdas
+path=/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunLow5-2018091100-2018091800/$cdump.20180911/00
+path=/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunLow5-2018091100-2018091800/$cdump.20180923/00
 cd $path
 
-fhr=@fhr@
-fmax=@fmax@
-finc=@finc@
-nemsio="@nemsio@"
-grb2="@grb2@"
-concurrent_jobs=@concurrent_jobs@
+fhr=288
+fmax=288
+finc=24
+nemsio=".false."
+grb2=".true."
+concurrent_jobs=3
 typeset -Z3 fhr
 
 count=0

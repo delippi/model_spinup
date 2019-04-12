@@ -46,7 +46,7 @@ for exp in range(exp_count):
 
 
 
-outputdir="/gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup/plots/figs"
+outputdir="/gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup/plots/figs/288"
 print(filename,pdy,cyc,valpdy,valcyc,valtime)
 data_in=[]
 for i in range(exp_count): data_in.append(os.path.join(datadir[i],filename[i]))   # name of analysis file
@@ -82,8 +82,8 @@ m = Basemap(llcrnrlon=llcrnrlon+offsetright,   llcrnrlat=llcrnrlat+offsetup,
 
 parallels = np.arange(-80.,80,10.)
 meridians = np.arange(-180,180.,10.)
-m.drawcoastlines(linewidth=1.25)
-m.drawcountries(linewidth=1.25)
+m.drawcoastlines(linewidth=1.25*0.5)
+m.drawcountries(linewidth=1.25*0.5)
 
 def mkplot(varname):
     print("mkplot - "+str(multiprocessing.current_process()))
@@ -128,7 +128,7 @@ def mkplot(varname):
 
     for i in range(exp_count):
         print i
-        if(i==0):
+        if(i==9):
            color='gray'
            cs1=m.contour(xi[i],yi[i],var_n[i],clevs,colors=color,linestyles='-')
            ax.plot(0,0,color=color,label="NATURE")
@@ -138,10 +138,15 @@ def mkplot(varname):
            cs2=m.contour(xi[i],yi[i],var_n[i],clevs,colors=color,linestyles='-')
            ax.plot(0,0,color=color,label="NODA")
            plt.clabel(cs2,inline=1,fontsize=6,colors=color,fmt='%1.0f')
-        if(i==2):
+        if(i==9):
            color='maroon'
            cs3=m.contour(xi[i],yi[i],var_n[i],clevs,colors=color,linestyles='-')
            ax.plot(0,0,color=color,label="NEXRAD")
+           plt.clabel(cs3,inline=1,fontsize=6,colors=color,fmt='%1.0f')
+        if(i==3):
+           color='green'
+           cs3=m.contour(xi[i],yi[i],var_n[i],clevs,colors=color,linestyles='-')
+           ax.plot(0,0,color=color,label="NODA (stopstart)")
            plt.clabel(cs3,inline=1,fontsize=6,colors=color,fmt='%1.0f')
 
 
@@ -151,7 +156,7 @@ def mkplot(varname):
 
     plt.xticks(visible=False)
     plt.yticks(visible=False)
-    plt.savefig(outputdir+'/gfs.t%sz.%s_v%s_atmf%s_%s.png' % (cyc[1],pdy[1]+cyc[1],valtime[1],fhr[1],varname),dpi=250, bbox_inches='tight')
+    plt.savefig(outputdir+'/gfs.t%sz.%s_v%s_atmf%s_%s.png' % (cyc[2],pdy[2]+cyc[2],valtime[2],fhr[2],varname),dpi=250, bbox_inches='tight')
 
     print("fig is located: "+outputdir)
 
@@ -184,9 +189,10 @@ def plot_HGT_P0_L100_GGA0(var_n):
     longname="Geopotential Height on Isobaric Levels"; units="gpm"
     var_n=var_n/10.
     clevs=np.arange(444,984,6).tolist()
+    clevs=[576]
     cticks=clevs
     cm='k'
-    title="%d-hPa geopotential height \n %s %sZ %sHR Fcst Valid %s %sZ" % (plevel,pdy[1],cyc[1],fhr[1],valpdy[1],valcyc[1])
+    title="%d-hPa geopotential height \n %s %sZ %sHR Fcst Valid %s %sZ" % (plevel,pdy[2],cyc[2],fhr[2],valpdy[2],valcyc[2])
     return(var_n,clevs,cticks,cm,units,longname,title)
 
 
@@ -197,7 +203,7 @@ def plot_TMP_P0_L100_GGA0(var_n):
     clevs=np.arange(150,300,4).tolist()
     cticks=clevs
     cm='k'
-    title="%d-hPa temperature \n %s %sZ %sHR Fcst Valid %s %sZ" % (plevel,pdy[1],cyc[1],fhr[1],valpdy[1],valcyc[1])
+    title="%d-hPa temperature \n %s %sZ %sHR Fcst Valid %s %sZ" % (plevel,pdy[2],cyc[2],fhr[2],valpdy[2],valcyc[2])
     return(var_n,clevs,cticks,cm,units,longname,title)
 
 def plot_dbz(var_n):

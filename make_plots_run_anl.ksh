@@ -15,6 +15,7 @@ EXP="FreeRunLow"
 EXP1="FreeRunLow1"
 EXP2="FreeRunLow2"
 EXP3="FreeRunLow4"
+EXP4="FreeRunLow5"
 cyc="00"
 pdy=20180911
 date_exp_start=2018091100
@@ -24,7 +25,7 @@ group=1
 #sets of 10
 if   [[ $group -eq 1 ]]; then
    FHSTART=0
-   FHEND=240 #216
+   FHEND=288 #216
 elif [[ $group -eq 2 ]]; then
    FHSTART=240
    FHEND=456
@@ -38,7 +39,7 @@ fi
 #FHSTART=936
 #FHEND=936
 
-FHINC=240
+FHINC=24
 
 typeset -Z2 cyc
 
@@ -56,6 +57,7 @@ while [[ $FH -le $FHEND ]]; do
    sed -i                   "s/@EXP1@/${EXP1}/g" make_plots_anl_${suffix}.ksh
    sed -i                   "s/@EXP2@/${EXP2}/g" make_plots_anl_${suffix}.ksh
    sed -i                   "s/@EXP3@/${EXP3}/g" make_plots_anl_${suffix}.ksh
+   sed -i                   "s/@EXP4@/${EXP4}/g" make_plots_anl_${suffix}.ksh
    sed -i                   "s/@cycs@/${cycs}/g" make_plots_anl_${suffix}.ksh
    sed -i                  "s/@make_figs@/YES/g" make_plots_anl_${suffix}.ksh
    sed -i "s/@date_exp_start@/$date_exp_start/g" make_plots_anl_${suffix}.ksh

@@ -1,25 +1,25 @@
 #!/bin/ksh
 #BSUB -P FV3GFS-T2O
-#BSUB -J fv3gfs_osse_post_@EXP@
+#BSUB -J fv3gfs_osse_post_FreeRunLow
 #BSUB -W 06:00                      # wall-clock time (hrs:mins)
 #BSUB -n 1                          # number of tasks in job
 #BSUB -R "rusage[mem=3072]"         # number of cores
 #BSUB -q "dev"                      # queue
-#BSUB -o fv3gfs_osse_plot_@EXP@.log # output file name in which %J is replaced by the job ID
+#BSUB -o fv3gfs_osse_plot_FreeRunLow.log # output file name in which %J is replaced by the job ID
 
 #set -x
 echo "make plot/pull script start"
 export ndate=/gpfs/hps2/u/Donald.E.Lippi/bin/ndate
-EXP="@EXP@"
-EXP1="@EXP1@"
-EXP2="@EXP2@"
-EXP3="@EXP3@"
-EXP4="@EXP4@"
-cycs="@cycs@"
+EXP="FreeRunLow"
+EXP1="FreeRunLow1"
+EXP2="FreeRunLow2"
+EXP3="FreeRunLow4"
+EXP4="FreeRunLow5"
+cycs=""
 DATES="2018091100-2018091800"
-date_exp_start=@date_exp_start@
-input_nemsio="@input_nemsio@"
-input_grib2="@input_grib2@"
+date_exp_start=2018091100
+input_nemsio="NO"
+input_grib2="YES"
 BASE="/gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup/"
 typeset -Z2 cyc
 
@@ -28,8 +28,8 @@ typeset -Z2 cyc
 FIGS="sfc_figs"
 
 #SETUP COUNTERS
-FHSTART=@FHSTART@ #00
-FHEND=@FHEND@ #24
+FHSTART=288 #00
+FHEND=288 #24
 FHINC=1
 FH=$FHSTART
 date_exp_start2=`$ndate +288 $date_exp_start`

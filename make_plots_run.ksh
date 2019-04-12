@@ -19,7 +19,7 @@ cyc="00"
 pdy=20180911
 date_exp_start=2018091100
 
-group=4
+group=1
 
 #sets of 10
 if   [[ $group -eq 1 ]]; then
@@ -63,8 +63,8 @@ while [[ $FH -le $FHEND ]]; do
    sed -i     "s/@input_nemsio@/$input_nemsio/g" make_plots_${suffix}.ksh
    sed -i       "s/@input_grib2@/$input_grib2/g" make_plots_${suffix}.ksh
 
-   bsub < make_plots_${suffix}.ksh
-   #ksh  make_plots_${suffix}.ksh
+   #bsub < make_plots_${suffix}.ksh
+   ksh  make_plots_${suffix}.ksh
    
    #(( concurrent_jobs=$concurrent_jobs+1 ))
    #if [[ $concurrent_jobs -eq 10 ]]; then; wait $job; concurrent_jobs=0; fi #wait and reset job count

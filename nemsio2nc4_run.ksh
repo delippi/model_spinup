@@ -6,11 +6,13 @@ cd /gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup
 mkdir -p figs
 
 #exps="FreeRunLow1 FreeRunLow2 NATURE NODA"
-exps="FreeRunLow1 FreeRunLow2"
-#exps="FreeRunLow1"
+exps="FreeRunLow1 FreeRunLow2"; cdump="gfs"
+exps="FreeRunLow4";             cdump="gdas"
+exps="FreeRunLow5";             cdump="gdas"
 
-fhr=0
+fhr=288
 fmax=936 #39 days
+fmax=288
 finc=24
 nemsio=".false."
 grb2=".true."
@@ -29,6 +31,7 @@ cd convert2nc4
 cat /dev/null > nemsio2nc4.$exp.log 
 cp ../templates/convert2nc4.template.ksh convert2nc4.$exp.ksh
 sed -i                         "s/@exp@/$exp/g" convert2nc4.$exp.ksh
+sed -i                     "s/@cdump@/$cdump/g" convert2nc4.$exp.ksh
 sed -i                         "s/@fhr@/$fhr/g" convert2nc4.$exp.ksh
 sed -i                       "s/@fmax@/$fmax/g" convert2nc4.$exp.ksh
 sed -i                       "s/@finc@/$finc/g" convert2nc4.$exp.ksh
