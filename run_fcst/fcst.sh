@@ -8,39 +8,20 @@
 #BSUB -R "1*{select[craylinux && !vnode]} + 1920*{select[craylinux && vnode]span[ptile=24]}"
 #BSUB -extsched 'CRAYLINUX[]'
 
-#00
-#913c22ac2408e333ce26e5df9f2385e2510a63a2  gdas.t00z.atmf000.nemsio v00
-#007e7b97a2ece2b708aead001ec925a97d8274cf  gdas.t00z.atmf003.nemsio v03
-#7cc51fa5330be461592a273eebef69cf1afd0b40  gdas.t00z.atmf006.nemsio v06
-#5afb69d530b3ce9873e9b0f1ea7ee1170f5d8c7d  gdas.t00z.atmf009.nemsio v09
-##
-#46d952068f2f5840527c07bf341bbcd0946b0e4a  atmf000.tile1.nc
-#3d51753fc1cadc88a1d415a4ac107453c7ee6147  atmf003.tile1.nc
-#00b34c2629ef42a9659af491d897e7812aa6ca13  atmf006.tile1.nc
-#22de5b93f493e8cc68c9b8c8b4df5128a13cbfea  atmf009.tile1.nc
-
-#06
-#bb34d02fec9dd6766b45b5a13e8365f66a6e0ff9  gdas.t06z.atmf000.nemsio v06
-#4f07827aebd4756d3af52578a3c5d97381df6e56  gdas.t06z.atmf003.nemsio v09
-#3da621875f72daad97d8db261743d504ea01822b  gdas.t06z.atmf006.nemsio v12
-#ef6a0223ca2b41c5d80c2c620188ed53d8537bfa  gdas.t06z.atmf009.nemsio v15
-##################################################
-
-#00
-#cfcee7eb25601e4e5a3a3bfec833d33b7ecde919  gdas.t00z.atmf000.nemsio
-#211661d1a3e7ea7efc4726eacdb4bc7d897e36e1  gdas.t00z.atmf003.nemsio
-#8aebd9b1cdcb9241f196fd99a51457d0720efeb1  gdas.t00z.atmf006.nemsio
-#b0b5f7d7b18aa2106c447d0d82ce38f1825fc107  gdas.t00z.sfcf000.nemsio
-#cb0e46a83bfb4391b64499d0c16e8ed7d88c4350  gdas.t00z.sfcf003.nemsio
-#b0f25536676cb79c37cce37d1a9d20559f1537b5  gdas.t00z.sfcf006.nemsio
-##
-#06
-
+#                  00                                                                  06
+#a5a6cc0351afd79e0857ff809568f6bc1f39f2b3  gdas.t00z.atmf000.nemsio
+#81b7c6782e498f69908dd895680303ae8913923e  gdas.t00z.atmf003.nemsio
+#8cc91592e278fe50848dd4e0b17464785524633d  gdas.t00z.atmf006.nemsio
+#a8674dac71182905e3a5cf9f6245e7f04595480a  gdas.t00z.atmf009.nemsio
+#c6ec9cd89bae6d89d7928651af5c62f078c6fbd3  gdas.t00z.sfcf000.nemsio
+#dfdb32eaba24c986e9d4f11444969a2c3630e9c0  gdas.t00z.sfcf003.nemsio
+#11a82bf70b643d4c5d2c648863b5aa6ea25bd5db  gdas.t00z.sfcf006.nemsio
+#408770c1a2d08ab97ef73fc8c6d7eea69f15aedc  gdas.t00z.sfcf009.nemsio
 
 
 
 export PDY="20180911"
-export cyc="06"
+export cyc="12"
 export CDUMP="gdas"
 export CDATE="${PDY}${cyc}"
 

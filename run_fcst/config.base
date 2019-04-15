@@ -204,7 +204,7 @@ export CASE_ENKF="C384"
 
 # Surface cycle update frequency
 if [[ "$CDUMP" == "gdas" ]] ; then
-   export FHCYC=24
+   export FHCYC=1
 elif [[ "$CDUMP" == "gfs" ]] ; then
    export FHCYC=24
 fi

@@ -18,26 +18,23 @@ nemsio2nc4.py --nemsio gdas.t06z.sfcf003.nemsio
 '''
 
 
-dir00="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunLow5-2018091100-2018091800/gdas.20180911/00/"
-dir06="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunLow5-2018091100-2018091800/gdas.20180911/06/"
-atmf009="gdas.t00z.atmf009.nc4"
-sfcf009="gdas.t00z.sfcf009.nc4"
-atmf003="gdas.t06z.atmf003.nc4"
-sfcf003="gdas.t06z.sfcf003.nc4"
+cyc1="06"
+cyc2="12"
 
-atmf009=os.path.join(dir00,atmf009)
-sfcf009=os.path.join(dir00,sfcf009)
-atmf003=os.path.join(dir06,atmf003)
-sfcf003=os.path.join(dir06,sfcf003)
+dir00="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunLow5-2018091100-2018091800/gdas.20180911/"+cyc1+"/"
+dir06="/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunLow5-2018091100-2018091800/gdas.20180911/"+cyc2+"/"
+atmf009="gdas.t"+cyc1+"z.atmf009.nc4"; sfcf009="gdas.t"+cyc1+"z.sfcf009.nc4"
+atmf003="gdas.t"+cyc2+"z.atmf003.nc4"; sfcf003="gdas.t"+cyc2+"z.sfcf003.nc4"
 
-atmf009fnd=Dataset(atmf009,mode='r')
-sfcf009fnd=Dataset(sfcf009,mode='r')
-atmf003fnd=Dataset(atmf003,mode='r')
-sfcf003fnd=Dataset(sfcf003,mode='r')
+atmf009=os.path.join(dir00,atmf009); sfcf009=os.path.join(dir00,sfcf009)
+atmf003=os.path.join(dir06,atmf003); sfcf003=os.path.join(dir06,sfcf003)
+
+atmf009fnd=Dataset(atmf009,mode='r'); sfcf009fnd=Dataset(sfcf009,mode='r')
+atmf003fnd=Dataset(atmf003,mode='r'); sfcf003fnd=Dataset(sfcf003,mode='r')
+
 fnd=atmf009fnd
 
-lats=768
-lons=1536
+lats=768; lons=1536
 
 sfc2d=[
 'alnsfsfc','alnwfsfc','alvsfsfc','alvwfsfc',
@@ -62,7 +59,7 @@ var2d=['pressfc','hgtsfc',]
 var3d=[
 'ugrdmidlayer','vgrdmidlayer',
 'dzdtmidlayer','delzmidlayer',
-'tmpmidlayer','dpresmidlayer',
+'tmpmidlayer' ,'dpresmidlayer',
 'spfhmidlayer','clwmrmidlayer',
 'rwmrmidlayer','icmrmidlayer',
 'snmrmidlayer','grlemidlayer',
@@ -70,29 +67,30 @@ var3d=[
 ]
 var3d=['ugrdmidlayer']
 
-atmf009var=np.zeros(shape=(64,lats,lons))
-sfcf009var=np.zeros(shape=(lats,lons))
-atmf003var=np.zeros(shape=(64,lats,lons))
-sfcf003var=np.zeros(shape=(lats,lons))
+atmf009var=np.zeros(shape=(64,lats,lons)); sfcf009var=np.zeros(shape=(lats,lons))
+atmf003var=np.zeros(shape=(64,lats,lons)); sfcf003var=np.zeros(shape=(lats,lons))
 
-import datetime
-time009=atmf009fnd.variables['time'][:]
-time003=atmf003fnd.variables['time'][:]
-tunits009=atmf009fnd.variables['time'].units
-tunits003=atmf003fnd.variables['time'].units
-tcal009=atmf003fnd.variables['time'].calendar
-tcal003=atmf003fnd.variables['time'].calendar
+#import datetime
+#time009=atmf009fnd.variables['time'][:]
+#time003=atmf003fnd.variables['time'][:]
+#tunits009=atmf009fnd.variables['time'].units
+#tunits003=atmf003fnd.variables['time'].units
+#tcal009=atmf003fnd.variables['time'].calendar
+#tcal003=atmf003fnd.variables['time'].calendar
 
-datevar009=num2date(time009,units=tunits009,calendar=tcal009)
-datevar003=num2date(time003,units=tunits003,calendar=tcal003)
+#datevar009=num2date(time009,units=tunits009,calendar=tcal009)
+#datevar003=num2date(time003,units=tunits003,calendar=tcal003)
 
-print(datevar009,datevar003)
+#print(datevar009,datevar003)
 
 if(True):
  for v3 in var3d:
     atmf009var[:,:,:]=atmf009fnd.variables[v3][0,:,:,:]
     atmf003var[:,:,:]=atmf003fnd.variables[v3][0,:,:,:]
     diff=atmf009var-atmf003var
+    arr=np.where(diff==np.max(diff))
+    levmax=arr[0][0]
+    print(arr)
     print(v3,np.min(diff),np.max(diff),np.shape(diff))
 
 if(False):
@@ -145,9 +143,11 @@ xi,yi = m(lon,lat)
 def plot_ugrd(var_n): 
     """zonal wind diff"""
     longname="ugrd diff"; units="m/s"
-    clevs=[-.1,-.05,-.01,0,.01,.05,.1]
-    cticks=[-.1,-.05,-.01,0,.01,.05,.1]
-    title="zonal wind diff"
+    #clevs=[-.1,-.05,-.01,0,.01,.05,.1]
+    clevs=[-5,-4,-3,-2,-1,0,1,2,3,4,5]
+    cticks=clevs
+    
+    title="zonal wind diff level "+str(levmax)
     cm='jet'
     return(var_n,clevs,cticks,cm,units,longname,title)
 
@@ -162,7 +162,7 @@ var_n=np.roll(var_n,nlon/2,axis=1)
 function=dispatcher[varname]
 var_n,clevs,cticks,cm,units,longname,title=function(var_n)
 
-cs = m.contourf(xi,yi,diff[20,:,:],clevs,cmap=cm,extend='both')
+cs = m.contourf(xi,yi,diff[levmax,:,:],clevs,cmap=cm,extend='both')
 cbar = m.colorbar(cs,location='bottom',pad="5%",extend="both",ticks=cticks)
 cbar.ax.tick_params(labelsize=8.5)
 cbar.set_label(varname+": "+longname+" ["+str(units)+"]")
