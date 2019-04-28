@@ -6,21 +6,22 @@ cd /gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup
 mkdir -p figs
 
 #exps="FreeRunLow1 FreeRunLow2 NATURE NODA"
-exps="FreeRunLow1 FreeRunLow2"; cdump="gfs"
-exps="FreeRunLow4";             cdump="gdas"
-exps="FreeRunLow5";             cdump="gdas"
+#exps="FreeRunLow1 FreeRunLow2"; cdump="gfs"
+#exps="FreeRunLow4";             cdump="gdas"
+#exps="FreeRunLow5";             cdump="gdas"
+#exps="FreeRunHigh1";            cdump="gfs"
+exps="FreeRunHigh2";            cdump="gfs"
 
-fhr=288
+fhr=0
 fmax=936 #39 days
-fmax=288
 finc=24
 nemsio=".false."
 grb2=".true."
-RES=384
-#RES=768
+#RES=384
+RES=768
 
 if [[ $RES -eq 384 ]]; then; concurrent_jobs=3; fi
-if [[ $RES -eq 768 ]]; then; concurrent_jobs=3 ; fi
+if [[ $RES -eq 768 ]]; then; concurrent_jobs=2 ; fi
 
 
 for exp in $exps; do

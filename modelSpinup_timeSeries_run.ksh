@@ -4,10 +4,8 @@ cd /gpfs/hps3/emc/meso/save/Donald.E.Lippi/model_spinup
 mkdir -p figs
 
 #Choose the experiment path
-#datapath1='/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/NATURE-2018091100-2018091800/gfs.20180911/00/'
-#datapath2='/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/NODA-2018091100-2018091800/gfs.20180911/06/'
-datapath1='/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunLow1-2018091100-2018091800/gfs.20180911/00/'
-datapath2='/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunLow2-2018091100-2018091800/gfs.20180911/00/'
+datapath1='/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunHigh1-2018091100-2018091800/gfs.20180911/00/'
+datapath2='/gpfs/hps2/ptmp/Donald.E.Lippi/fv3gfs_dl2rw/2018091100/FreeRunHigh2-2018091100-2018091800/gfs.20180911/00/'
 
 #Start date for the experiment
 SDATE=2018091100
@@ -22,6 +20,7 @@ fields="ugrdmidlayer"
 fields="UGRD_P0_L100_GGA0 TMP_P0_L100_GGA0 SPFH_P0_L100_GGA0 PRES_P0_L101_GGA0"
 fields="UGRD_P0_L100_GGA0 TMP_P0_L100_GGA0 SPFH_P0_L100_GGA0"
 fields="UGRD_P0_L100_GGA0"
+fields="TMP_P0_L100_GGA0 SPFH_P0_L100_GGA0"
 
 #Choose start, end, and increment times
 fhr=0
@@ -29,8 +28,8 @@ fmax=936
 finc=24
 
 #Choose model resolution (384=26km; 768=13km)
-RES=384
-#RES=768
+#RES=384
+RES=768
 
 #Pick type of calculation
 RootMeanSquareDiff="True"
